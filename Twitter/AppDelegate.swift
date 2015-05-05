@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
         if User.currentUser != nil {
-            println("Current user found: \(User.currentUser!.name)")
             var vc = storyBoard.instantiateViewControllerWithIdentifier("TweetsNavigationViewController") as! UIViewController
             window?.rootViewController = vc
         }

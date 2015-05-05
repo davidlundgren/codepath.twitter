@@ -10,6 +10,7 @@ import UIKit
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tweets: [Tweet]?
+    var refreshControl: UIRefreshControl!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,11 +19,12 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
         self.tableView.dataSource = self
         self.tableView.delegate = self
+
+        self.loadData()
         
-        TwitterClient.sharedInstance.timeLine(nil, completion: { (tweets, error) -> () in
-            self.tweets = tweets
-            self.tableView.reloadData()
-        })
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.insertSubview(refreshControl, atIndex: 0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,6 +49,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         let url = NSURL(string: tweet.user!.profileImageURL!)
         cell.userAvatarView.setImageWithURL(url)
+        cell.timeStampLabel.text = tweet.createdAtNiceString!
         
         return cell
     }
@@ -64,5 +67,17 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBAction func onLogout(sender: AnyObject) {
         User.currentUser?.logout()
+    }
+    
+    func onRefresh() {
+        self.loadData()
+        self.refreshControl.endRefreshing()
+    }
+    
+    func loadData() {
+        TwitterClient.sharedInstance.timeLine(nil, completion: { (tweets, error) -> () in
+            self.tweets = tweets
+            self.tableView.reloadData()
+        })
     }
 }
