@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetViewControllerDelegate {
     var tweets: [Tweet]?
     var refreshControl: UIRefreshControl!
     
@@ -16,7 +16,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadData", name: userDidPostTweetNotification, object: nil)
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
 
@@ -55,19 +57,18 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+ 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let navigationController = segue.destinationViewController as! UINavigationController
+        let tweetViewController = navigationController.topViewController as! TweetViewController
+        tweetViewController.delegate = self
     }
-    */
+
 
     @IBAction func onLogout(sender: AnyObject) {
         User.currentUser?.logout()
     }
+
     
     func onRefresh() {
         self.loadData()
@@ -75,9 +76,17 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func loadData() {
+        println("loading data")
         TwitterClient.sharedInstance.timeLine(nil, completion: { (tweets, error) -> () in
             self.tweets = tweets
             self.tableView.reloadData()
         })
     }
+    
+    
+    func tweetViewController(tweetViewController: TweetViewController) {
+        println("delegate")
+        self.loadData()
+    }
+    
 }

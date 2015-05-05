@@ -12,6 +12,7 @@ var _currentUser: User?
 let currentUserKey = "kCurrentUser"
 let userDidLoginNotification = "userDidLoginNotification"
 let userDidLogoutNotification =  "userDidLogoutNotification"
+let userDidPostTweetNotification = "userDidPostTweet"
 
 class User: NSObject {
     var name: String?

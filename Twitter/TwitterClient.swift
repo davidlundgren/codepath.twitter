@@ -33,6 +33,26 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         })
     }
     
+    
+    func updateStatus(status: String, parameters: NSDictionary?) -> Bool {
+        var tweetParms = [String: String]()
+        if parameters != nil {
+            tweetParms = parameters!.copy() as! [String : String]
+        }
+        tweetParms["status"] = status
+        var returnValue = false
+        POST("1.1/statuses/update.json", parameters: tweetParms, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            returnValue = true
+            println("updating")
+            NSNotificationCenter.defaultCenter().postNotificationName(userDidPostTweetNotification, object: nil)
+            }, failure: {(operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("error posting status")
+                returnValue = false
+        })
+        return returnValue
+    }
+    
+    
     func loginWithCompletion(completion: (user: User?, error: NSError?) -> ()) {
         loginCompletion = completion
         requestSerializer.removeAccessToken()
@@ -71,4 +91,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 self.loginCompletion?(user: nil, error: error)
         }
     }
+
+    
+    
 }
