@@ -14,6 +14,8 @@ class Tweet: NSObject {
     var createdAtString: String?
     var createdAt: NSDate?
     var createdAtNiceString: String?
+    var dictionary: NSDictionary?
+    var favorited: Bool?
     
     init(dictionary: NSDictionary) {
         user = User(dictionary: dictionary["user"] as! NSDictionary)
@@ -26,6 +28,8 @@ class Tweet: NSObject {
         formatter.dateStyle = .MediumStyle
         formatter.doesRelativeDateFormatting = true
         createdAtNiceString = formatter.stringFromDate(createdAt!)
+        self.dictionary = dictionary
+        self.favorited = dictionary["favorited"] as? Bool
     }
     
     

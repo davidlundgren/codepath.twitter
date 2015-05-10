@@ -15,9 +15,13 @@ class TweetViewCell: UITableViewCell {
     @IBOutlet weak var userAvatarView: UIImageView!
     @IBOutlet weak var timeStampLabel: UILabel!
     
+    @IBOutlet weak var favoriteImageView: UIImageView!
+    @IBOutlet weak var replyImageView: UIImageView!
+    @IBOutlet weak var retweetImageView: UIImageView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -25,5 +29,7 @@ class TweetViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    
 
 }

@@ -46,13 +46,18 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetViewCell", forIndexPath: indexPath) as! TweetViewCell
         let tweet = tweets![indexPath.row]
+        
         cell.userLabel.text = tweet.user!.name!
         cell.tweetBodyLabel.text = tweet.text!
         
         let url = NSURL(string: tweet.user!.profileImageURL!)
         cell.userAvatarView.setImageWithURL(url)
         cell.timeStampLabel.text = tweet.createdAtNiceString!
-        
+        if let favorited = tweet.favorited {
+            if favorited {
+                cell.favoriteImageView.image = UIImage(named: "favorite_on")
+            }
+        }
         return cell
     }
     
