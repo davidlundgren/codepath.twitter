@@ -21,14 +21,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
-
+        
         self.loadData()
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.insertSubview(refreshControl, atIndex: 0)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -61,19 +61,29 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
-
- 
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let navigationController = segue.destinationViewController as! UINavigationController
-        let tweetViewController = navigationController.topViewController as! TweetViewController
-        tweetViewController.delegate = self
+        let vc = segue.destinationViewController
+        if vc.isMemberOfClass(UINavigationController) {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let tweetViewController = navigationController.topViewController as! TweetViewController
+            tweetViewController.delegate = self
+        } else if vc.isMemberOfClass(ProfileViewController) {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)!
+            let tweet = tweets![indexPath.row]
+            let profileViewController = segue.destinationViewController as! ProfileViewController
+            profileViewController.user = tweet.user
+        }
+        
     }
-
-
+    
+    
     @IBAction func onLogout(sender: AnyObject) {
         User.currentUser?.logout()
     }
-
+    
     
     func onRefresh() {
         self.loadData()
@@ -81,7 +91,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func loadData() {
-        println("loading data")
         TwitterClient.sharedInstance.timeLine(nil, completion: { (tweets, error) -> () in
             self.tweets = tweets
             self.tableView.reloadData()
@@ -90,8 +99,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func tweetViewController(tweetViewController: TweetViewController) {
-        println("delegate")
         self.loadData()
     }
+    
+    
     
 }

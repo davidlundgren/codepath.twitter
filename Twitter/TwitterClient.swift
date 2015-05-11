@@ -24,7 +24,6 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     
     func timeLine(parameters: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
         GET("1.1/statuses/home_timeline.json", parameters: parameters, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-            //println("timeline: \(response)")
             var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
             completion(tweets: tweets, error: nil)
             }, failure: {(operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
@@ -43,7 +42,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         var returnValue = false
         POST("1.1/statuses/update.json", parameters: tweetParms, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             returnValue = true
-            println("updating")
+            println("updating status: \(status)")
             NSNotificationCenter.defaultCenter().postNotificationName(userDidPostTweetNotification, object: nil)
             }, failure: {(operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 println("error posting status")
