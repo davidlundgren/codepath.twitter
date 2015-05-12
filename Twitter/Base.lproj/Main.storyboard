@@ -238,9 +238,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ye-36-fEj">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="188"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f5n-HY-IXY">
                                 <rect key="frame" x="8" y="196" width="83" height="87"/>
                             </imageView>
@@ -250,6 +247,27 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="300000000 Tweets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQZ-zK-lW1">
+                                <rect key="frame" x="99" y="229" width="144" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="300000000 Followers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htl-yL-5K6">
+                                <rect key="frame" x="99" y="258" width="165" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="300000000 Following" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKW-c2-UNm">
+                                <rect key="frame" x="99" y="287" width="164" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ye-36-fEj">
+                                <rect key="frame" x="2" y="64" width="320" height="124"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -262,7 +280,10 @@
                     <navigationItem key="navigationItem" id="jpV-HZ-pve"/>
                     <connections>
                         <outlet property="avatarImageView" destination="f5n-HY-IXY" id="Okw-pM-sz3"/>
+                        <outlet property="followerCountLabel" destination="htl-yL-5K6" id="Fnh-t1-w9G"/>
+                        <outlet property="followingCountLabel" destination="NKW-c2-UNm" id="E28-Ez-8Fa"/>
                         <outlet property="headerImageView" destination="9ye-36-fEj" id="KYh-9f-7PT"/>
+                        <outlet property="tweetCountLabel" destination="dQZ-zK-lW1" id="tyw-ve-Rsi"/>
                         <outlet property="userRealNameLabel" destination="1Ok-KR-KMg" id="pBk-Af-xjV"/>
                     </connections>
                 </viewController>
