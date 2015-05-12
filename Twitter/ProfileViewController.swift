@@ -9,7 +9,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    
     var user: User!
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -20,6 +20,9 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if user == nil {
+            user = User.currentUser
+        }
         
         userRealNameLabel.text = user.name
         followerCountLabel.text = "\(user.numFollowers!) Followers"
@@ -29,24 +32,18 @@ class ProfileViewController: UIViewController {
         let avatarImageURL = NSURL(string: user.profileImageURL!)
         avatarImageView.setImageWithURL(avatarImageURL)
         
+        // This can be nil, but ehhhhh
         let headerImageURL = NSURL(string: user.bannerImageURL!)
         headerImageView.setImageWithURL(headerImageURL)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        if self.revealViewController() != nil {
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
-    */
-
+    
 }

@@ -4,6 +4,7 @@
 target 'Twitter' do
   pod "AFNetworking"
   pod "BDBOAuth1Manager"
+  pod "SWRevealViewController"
 end
 
 target 'TwitterTests' do

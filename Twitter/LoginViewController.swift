@@ -12,11 +12,15 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.revealViewController() != nil {
+            self.view.userInteractionEnabled = true
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func onLogin(sender: AnyObject) {
@@ -26,7 +30,7 @@ class LoginViewController: UIViewController {
             if user != nil {
                 self.performSegueWithIdentifier("loginSegue", sender: self)
             } else {
-                // handle login error
+                println("LOGIN FAILED BUT THAT'S OKAY WE ALL MAKE MISTAKES")
             }
         }
 

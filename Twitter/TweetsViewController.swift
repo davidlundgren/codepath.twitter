@@ -12,10 +12,18 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     var tweets: [Tweet]?
     var refreshControl: UIRefreshControl!
     
+    var window: UIWindow?
+    var storyBoard = UIStoryboard(name: "Main", bundle: nil)
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.revealViewController() != nil {
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadData", name: userDidPostTweetNotification, object: nil)
         

@@ -8,37 +8,41 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Pods-Twitter-BDBOAuth1Manager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
+		</dict>
+		<key>Pods-Twitter-SWRevealViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-Twitter.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>42998887711FD41A6148CC64</key>
+		<key>1E83BC0A610E242059E30297</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>71A82823ACEAEB42CD1F4486</key>
+		<key>64AF810538BA3D6DDA0B7EF4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8FBD7D4B36D43A69FDAF2053</key>
+		<key>789C1DA1B7C6C82E461C116D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AD4BB654F50D2B51794663E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
